@@ -1,13 +1,12 @@
 package com.programmer.community.user.model;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
 public class User {
-	@Id
-	private String id;
-	private String userId;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -18,11 +17,9 @@ public class User {
 	private String addedDate;
 	private String lastActiveLogin;
 
-	public User(String id, String userId, String firstName, String lastName, String email, String password,
+	public User( String firstName, String lastName, String email, String password,
 			String image, long mobilNumber, boolean isBlocked, String addedDate, String lastActiveLogin) {
 		super();
-		this.id = id;
-		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -33,27 +30,10 @@ public class User {
 		this.addedDate = addedDate;
 		this.lastActiveLogin = lastActiveLogin;
 	}
-
+ 
 	public User() {
 		super();
 	}
-
-	public String getId() {
-		return this.id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getUserId() {
-		return this.userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
 	public String getFirstName() {
 		return this.firstName;
 	}
@@ -91,7 +71,7 @@ public class User {
 	}
 
 	public void setImage(String image) {
-		this.image = image;
+		this.image = null;
 	}
 
 	public long getMobilNumber() {
@@ -107,7 +87,7 @@ public class User {
 	}
 
 	public void setBlocked(boolean isBlocked) {
-		this.isBlocked = isBlocked;
+		this.isBlocked = false;
 	}
 
 	public String getAddedDate() {
@@ -115,7 +95,7 @@ public class User {
 	}
 
 	public void setAddedDate(String addedDate) {
-		this.addedDate = addedDate;
+		this.addedDate = new Date().toLocaleString();
 	}
 
 	public String getLastActiveLogin() {

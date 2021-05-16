@@ -6,4 +6,12 @@ import com.programmer.community.user.model.User;
 
 public interface UserDao extends MongoRepository<User, String> {
 
+	
+	
+	//Userdefined Methods
+	public User findByEmail(String email);
+	public User deleteByEmail(String email);
+	
+	
+	
 }

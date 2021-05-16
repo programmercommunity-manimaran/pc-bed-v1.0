@@ -27,26 +27,38 @@ public class UserServices {
 		}
 		throw new DataNotFoundException("user not found");
 	}
-
-	public Response add(User user) {
-		if (this.userDao.existsById(user.getId())) {
-			throw new DataAlreadyExistsException("user already exists");
+    
+	
+	//GetBy Mailid
+	public User getByMailId(String email) {
+		
+		if(userDao.findByEmail(email) != null) {
+			return userDao.findByEmail(email);
 		}
-		this.userDao.save(user);
+		
+		throw new DataNotFoundException("user not found");
+	}
+
+	//Post User With Email
+	public Response add(User user) {
+		if (userDao.findByEmail(user.getEmail()) != null) {
+			throw new DataAlreadyExistsException("User already exists");
+		}
+		 userDao.save(user);
 		return Response.getSuccess();
 	}
 
 	public Response update(User user) {
-		if (this.userDao.existsById(user.getId())) {
-			this.userDao.save(user);
+		if (userDao.findByEmail(user.getEmail()) != null) {
+			userDao.save(user);
 			return Response.getSuccess();
 		}
 		throw new DataNotFoundException("user not found");
 	}
 
-	public Response deleteByID(String id) {
-		if (this.userDao.existsById(id)) {
-			this.userDao.deleteById(id);
+	public Response deleteByEmail(String email) {
+		if (userDao.findByEmail(email) != null) {
+			this.userDao.deleteByEmail(email);
 			return Response.getSuccess();
 		}
 		throw new DataNotFoundException("user not found");
